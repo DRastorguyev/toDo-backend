@@ -45,5 +45,4 @@ function sortAndFilterTodos(todos, filterType, sortDirection) {
     const res = getTime(a.createdAt) - getTime(b.createdAt);
     return sortDirection.toUpperCase() === 'ASC' ? res : -res;
   });
-  
 }
