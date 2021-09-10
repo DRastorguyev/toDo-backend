@@ -1,18 +1,15 @@
-require('dotenv').config();
+const recursive = require('recursive-readdir-sync');
 const express = require('express');
-const sequelize = require('./db');
-const PORT = process.env.PORT;
+const fs = require('fs');
+
 const app = express();
 
-const start = async () => {
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync();
+app.use(express.json());
 
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-  } catch (e) {
-    console.log(e);
-  }
-};
+fs.access('data.txt', (e) => {
+  if (e) fs.writeFileSync('data.txt', '')
+})
 
-start();
+app.listen(process.env.PORT, () => {
+  console.log(`Server has been started`);
+})
