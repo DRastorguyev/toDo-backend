@@ -10,6 +10,8 @@ fs.access('data.txt', (e) => {
   if (e) fs.writeFileSync('data.txt', '')
 })
 
+
+
 app.listen(process.env.PORT, () => {
   console.log(`Server has been started`);
 })

@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-class Task {
+class Todo {
 
-	async saveTasks(data) {
+	async saveTodos(data) {
 		try {
 			await fs.promises.writeFile('data.txt', JSON.stringify(data), 'utf8')
 		} catch (e) {
@@ -10,7 +10,7 @@ class Task {
 		}
 	}
 
-	async getTasks() {
+	async getTodos() {
 		try {
 			const data = await fs.promises.readFile('data.txt', 'utf8')
 			const jsonData = await JSON.parse(data)
@@ -23,4 +23,4 @@ class Task {
 
 }
 
-module.exports = new Task()
+module.exports = new Todo()
