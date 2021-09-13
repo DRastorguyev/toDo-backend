@@ -1,4 +1,4 @@
-// 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 => personal access token
+// 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 => personal access token
 const express = require('express');
 const postRoutes = require('./routes/todo/todo.post.js')
 require('dotenv').config();
