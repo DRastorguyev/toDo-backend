@@ -1,6 +1,6 @@
-// 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 => personal access token
 const express = require('express');
-const postRoutes = require('./routes/todo/todo.post.js')
+const postRoutes = require('./routes/todo/todo.post.js');
+const getRoutes = require('./routes/todo/todo.get.js');
 require('dotenv').config();
 
 const app = express();
@@ -8,9 +8,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/todos', postRoutes)
+app.use('/todo', postRoutes);
+app.use('/todos', getRoutes);
 
-
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port ${process.env.PORT}...`);
 });
+
+
