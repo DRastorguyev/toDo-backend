@@ -1,4 +1,4 @@
-const { readTodos, writeTodo } = require('../../TodoModel.js');
+const { readTodos, writeTodo } = require('../../FuncModel.js');
 const { Router } = require('express');
 
 const router = Router();
@@ -12,7 +12,7 @@ router.delete('/rmtodo/:uuid', (req, res) => {
   writeTodo(todos);
 
   res.send(todos)
-  
+
 });
 
 module.exports = router;

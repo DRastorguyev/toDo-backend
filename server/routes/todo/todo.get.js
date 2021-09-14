@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { readTodos } = require('../../TodoModel');
+const { readTodos } = require('../../FuncModel');
 
 const router = Router();
 
