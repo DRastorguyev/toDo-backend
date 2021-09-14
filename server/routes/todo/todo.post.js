@@ -1,27 +1,26 @@
-const express = require('express');
-const router = express();
-const Todo = require('../../model/Todo');
+const { Router } = require('express');
 const { v4 } = require('uuid');
+const fs = require('fs');
 
-module.exports = router.post(
-  '/todo',
+const router = Router();
 
-  async (req, res, next) => {
-    const { name } = req.body;
+router.post('/', async (req, res) => {
+  const { name } = req.body;
 
-    const newTodo = {
-      uuid: v4(),
-      name,
-      done: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+  const createTodo = {
+    uuid: v4(),
+    name,
+    done: false,
+    createdAt: new Date().toISOString().slice(0, 10),
+  };
 
-    const todos = await Todo.getTodos();
-    todos.push(newTodo);
+  fs.appendFile('data.txt', JSON.stringify(createTodo, null, 2), (err) => {
+    if (err) throw err;
+  });
 
-    Todo.saveTodos(todos);
+  res.send(createTodo);
 
-    res.json(newTodo);
-  }
-);
+  console.log(createTodo);
+});
+
+module.exports = router;

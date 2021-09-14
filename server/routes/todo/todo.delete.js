@@ -1,19 +1,15 @@
-const express = require('express');
-const router = express();
-const Todo = require('../../model/Todo');
+const { Router, json } = require('express');
+const fs = require('fs');
 
-module.exports = router.delete(
-  '/todo/:id',
+const router = Router();
 
-  async (req, res, next) => {
-    let todos = await Todo.getTodos();
+router.delete('/', (req, res) => {
+  fs.readFile('data.txt', 'utf8', (err, data) => {
+    if (err) throw err;
 
-    const { id } = req.params;
+		console.log(data);
 
-    todos = todos.filter((todo) => todo.uuid !== id);
+  });
+});
 
-    await Todo.saveTodos(todos);
-
-    res.status(204).json();
-  }
-);
+module.exports = router;
