@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 class Func {
-  
+
   readTodos() {
     const data = fs.readFileSync('data.txt', 'utf8', (err, data) => {
       if (err) throw err;
@@ -14,6 +14,7 @@ class Func {
       if (err) throw err;
     });
   }
+
 }
 
 module.exports = new Func();
