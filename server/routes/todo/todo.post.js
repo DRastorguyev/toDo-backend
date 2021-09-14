@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { readTodos, writeTodo } = require('../../TodoModel');
 const { v4 } = require('uuid');
 const fs = require('fs');
 
@@ -14,13 +15,14 @@ router.post('/', async (req, res) => {
     createdAt: new Date().toISOString().slice(0, 10),
   };
 
-  fs.appendFile('data.txt', JSON.stringify(createTodo, null, 2), (err) => {
-    if (err) throw err;
-  });
+  const data = await readTodos();
+
+  data.push(createTodo);
+
+  writeTodo(data);
 
   res.send(createTodo);
-
-  console.log(createTodo);
 });
+
 
 module.exports = router;
