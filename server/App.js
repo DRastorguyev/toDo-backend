@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/todo', postRoutes);
 app.use('/todos', getRoutes);
-app.use('/rmtodo/:uuid', deleteRoutes);
+app.use('/', deleteRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port ${process.env.PORT}...`);
