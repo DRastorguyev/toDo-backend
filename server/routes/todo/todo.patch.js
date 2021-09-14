@@ -3,8 +3,8 @@ const { Router } = require('express');
 
 const router = Router();
 
-router.patch('/', (req, res, next) => {
-	
+router.patch('/todos', (req, res, next) => {
+  const name = req.params.name;
 });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const deleteRoutes = require('./routes/todo/todo.delete.js');
 const postRoutes = require('./routes/todo/todo.post.js');
 const getRoutes = require('./routes/todo/todo.get.js');
+const patchRoutes = require('./routes/todo/todo.patch.js');
 const express = require('express');
 require('dotenv').config();
 
@@ -9,6 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/todos:uuid:name', patchRoutes);
 app.use('/todo', postRoutes);
 app.use('/todos', getRoutes);
 app.use('/', deleteRoutes);
