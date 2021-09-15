@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/todos:uuid:name', patchRoutes);
+app.use('/', patchRoutes);
 app.use('/todo', postRoutes);
 app.use('/todos', getRoutes);
 app.use('/', deleteRoutes);

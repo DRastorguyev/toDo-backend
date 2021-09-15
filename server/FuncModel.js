@@ -8,7 +8,7 @@ const readTodos = () => {
 };
 
 const writeTodo = (data) => {
-  fs.writeFile('data.txt', JSON.stringify(data), 'utf8', (err) => {
+  fs.writeFile('data.txt', JSON.stringify(data, null, 2), 'utf8', (err) => {
     if (err) throw err;
   });
 };
