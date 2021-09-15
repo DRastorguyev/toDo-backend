@@ -3,7 +3,7 @@ const { readTodos } = require('../../FuncModel');
 
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/todos', (req, res) => {
   res.send(readTodos())
 });
 

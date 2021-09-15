@@ -3,7 +3,7 @@ const { Router } = require('express');
 
 const router = Router();
 
-router.delete('/rmtodo/:uuid', (req, res) => {
+router.delete('/todo/:uuid', (req, res) => {
 
   let todos = readTodos();
 

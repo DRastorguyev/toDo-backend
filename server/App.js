@@ -1,19 +1,14 @@
-const deleteRoutes = require('./routes/todo/todo.delete.js');
-const postRoutes = require('./routes/todo/todo.post.js');
-const getRoutes = require('./routes/todo/todo.get.js');
-const patchRoutes = require('./routes/todo/todo.patch.js');
+const recursive = require('recursive-readdir-sync');
 const express = require('express');
+const { json } = require('express');
 require('dotenv').config();
 
 const app = express();
+app.use(json())
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.use('/', patchRoutes);
-app.use('/todo', postRoutes);
-app.use('/todos', getRoutes);
-app.use('/', deleteRoutes);
+recursive(`${__dirname}/routes/`).forEach((file) =>
+  app.use('/', require(file))
+);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port ${process.env.PORT}...`);
