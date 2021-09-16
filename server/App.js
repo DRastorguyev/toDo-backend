@@ -2,7 +2,6 @@ const recursive = require('recursive-readdir-sync');
 const { json } = require('express');
 const express = require('express');
 const sequelize = require('./db');
-const PORT = process.env.PORT; //=> 3000
 require('dotenv').config();
 
 const app = express();
@@ -16,7 +15,9 @@ const start = async () => {
     await sequelize.authenticate();
     await sequelize.sync();
 
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}...`));
+    app.listen(process.env.PORT, () =>
+      console.log(`Server started on port ${process.env.PORT}...`)
+    );
   } catch (e) {
     console.error(e);
   }
