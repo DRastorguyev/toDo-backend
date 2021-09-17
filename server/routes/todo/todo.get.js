@@ -1,23 +1,19 @@
 const { Router } = require('express');
-const user = require('../../models/user');
+const { user } = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
 router.get('/todos', async (req, res) => {
-  const { id } = req.params;
 
-  const user = await user.findOne({
-    where: {
-      id,
-    },
-  });
+  const users = await user.findAll();
 
-  if (!user) {
-    return res.status(404).send({
-      message: `No user found with id ${id}`,
+  if (!users) {
+    return res.status(400).send({
+      message: 'Not found',
     });
   }
-  return res.send(user)
+
+  res.send(users);
 });
 
 module.exports = router;
