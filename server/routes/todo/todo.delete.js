@@ -1,17 +1,24 @@
 const { Router } = require('express');
+const { user } = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
-router.delete('/todo/:uuid', (req, res) => {
+router.delete('/todo/:id', (req, res) => {
+  const { id } = req.params;
 
-  let todos = readTodos();
+  const deletedTodo = user.destroy({
+    where: {
+      id,
+    },
+  });
 
-  todos = todos.filter((todo) => todo.uuid !== req.params.uuid);
+  if (!deletedTodo) {
+    return res.status(404).send({
+      message: 'id not defined',
+    });
+  }
 
-  writeTodo(todos);
-
-  res.send(todos)
-
+  res.send(deletedTodo)
 });
 
 module.exports = router;
