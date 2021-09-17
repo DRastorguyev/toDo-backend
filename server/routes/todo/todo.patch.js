@@ -1,19 +1,19 @@
 const { Router } = require('express');
-const { user } = require('../../models/index.js').sequelize.models;
+const { todo } = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
 router.patch('/todos/:id', async (req, res) => {
   const { id } = req.params;
-  const { editedName } = req.body;
+  const { editedTitle } = req.body;
   const { condition } = req.body;
 
   try {
-    const updated = await user.update(
-      { name: editedName, done: condition },
+    const updatedTodo = await todo.update(
+      { name: editedTitle, done: condition },
       { where: { id: id } }
     );
-    res.send(updated);
+    res.send(updatedTodo);
   } catch (e) {
     console.error(e);
   }

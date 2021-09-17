@@ -1,15 +1,14 @@
+const { todo } = require('../../models/index.js').sequelize.models;
 const { Router } = require('express');
 const express = require('express');
-const {user} = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
 router.post('/todo', async (req, res) => {
+  const { title } = req.body;
 
-  const { name } = req.body;
-
-  const newTodo = await user.create({
-    name,
+  const newTodo = await todo.create({
+    title,
   });
 
   res.send(newTodo);

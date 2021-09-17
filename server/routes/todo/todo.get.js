@@ -1,19 +1,19 @@
 const { Router } = require('express');
-const { user } = require('../../models/index.js').sequelize.models;
+const { todo } = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
 router.get('/todos', async (req, res) => {
 
-  const users = await user.findAll();
+  const todos = await todo.findAll();
 
-  if (!users) {
+  if (!todos) {
     return res.status(400).send({
       message: 'Not found',
     });
   }
 
-  res.send(users);
+  res.send(todos);
 });
 
 module.exports = router;
