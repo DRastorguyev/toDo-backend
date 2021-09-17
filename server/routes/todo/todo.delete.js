@@ -1,4 +1,3 @@
-const { readTodos, writeTodo } = require('../../FuncModel.js');
 const { Router } = require('express');
 
 const router = Router();
