@@ -1,28 +1,21 @@
 const { Router } = require('express');
+const { user } = require('../../models/index.js').sequelize.models;
 
 const router = Router();
 
-router.patch('/todos/:uuid', async (req, res) => {
-  let todos = readTodos(); // get the elements from the array
-  const fields = ['name', 'done'];
-  const { uuid } = req.params;
-  const editFields = {};
-
-  const editedIndex = todos.findIndex((todo) => todo.uuid === uuid);
+router.patch('/todos/:id', async (req, res) => {
+  const { id } = req.params;
+  const { editedName } = req.body;
+  const { condition } = req.body;
 
   try {
-    fields.forEach((propertyName) => {
-      if (propertyName in req.body)
-        editFields[propertyName] = req.body[propertyName];
-    });
-
-    todos[editedIndex] = { ...todos[editedIndex], ...editFields };
-
-    await writeTodo(todos);
-
-    res.send(todos[editedIndex]);
+    const updated = await user.update(
+      { name: editedName, done: condition },
+      { where: { id: id } }
+    );
+    res.send(updated);
   } catch (e) {
-    if (e) console.error(e);
+    console.error(e);
   }
 });
 
