@@ -4,6 +4,7 @@ module.exports = {
     password: 'root',
     database: 'todo',
     host: 'localhost',
+    port: 5432,
     dialect: 'postgres',
   },
   production: {

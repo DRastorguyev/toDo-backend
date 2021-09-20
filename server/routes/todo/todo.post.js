@@ -1,6 +1,5 @@
 const { todo } = require('../../models/index.js').sequelize.models;
 const { Router } = require('express');
-const express = require('express');
 
 const router = Router();
 

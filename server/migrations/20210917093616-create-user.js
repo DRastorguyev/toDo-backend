@@ -8,20 +8,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      email: {
         type: Sequelize.STRING,
-      },
-      done: {
-        type: Sequelize.BOOLEAN,
-      },
-      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        unique: true
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
+      role: {
+        type: Sequelize.STRING,
+        defaultValue: 'user'
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {

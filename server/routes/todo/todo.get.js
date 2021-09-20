@@ -1,10 +1,9 @@
 const { Router } = require('express');
-const { todo } = require('../../models/index.js').sequelize.models;
+const { todo } = require('../../models/index.js');
 
 const router = Router();
 
 router.get('/todos', async (req, res) => {
-
   const todos = await todo.findAll();
 
   if (!todos) {

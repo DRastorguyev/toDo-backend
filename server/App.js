@@ -1,5 +1,7 @@
 const recursive = require('recursive-readdir-sync');
 const express = require('express');
+const cors = require('cors');
+const authRouter = require('./routers/authRouter.js');
 require('dotenv').config();
 
 const app = express();
@@ -7,6 +9,13 @@ const app = express();
 app.use(express.json());
 
 // Run server...
+
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+);
 
 const start = async () => {
   try {
@@ -18,10 +27,14 @@ const start = async () => {
   }
 };
 
-// Routes collector...
+// Routes collector
 
 recursive(`${__dirname}/routes/`).forEach((file) =>
   app.use('/', require(file))
 );
+
+// Auth router
+
+app.use('/auth', authRouter);
 
 start();
