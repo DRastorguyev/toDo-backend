@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const { todo } = require('../../models/index.js').sequelize.models;
+  const authMiddlware = require('../../middleware/authMiddlware.js');
 
 const router = Router();
 
-router.delete('/todo/:id', (req, res) => {
+router.delete('/todo/:id', authMiddlware, (req, res) => {
   const { id } = req.params;
 
   const deletedTodo = todo.destroy({

@@ -11,20 +11,15 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      role: {
-        type: Sequelize.STRING,
-        defaultValue: 'user'
-      }
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('users');
   },
-
 };

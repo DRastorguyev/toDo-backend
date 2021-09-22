@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const generateJwt = (email, id, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+const generateJwt = (email, id) => {
+  return jwt.sign({ id, email }, process.env.SECRET_KEY, {
     expiresIn: '24h',
   });
 };
@@ -12,17 +12,23 @@ const generateJwt = (email, id, role) => {
 class authContoller {
   async registration(req, res) {
     try {
-      const { email, password, role } = req.body;
+      const { email, password } = req.body;
+
+      const candidate = await user.findOne({ where: { email } });
+
+      if (candidate) {
+        return res.send('Пользователь с такой почтой уже существует');
+      }
 
       const hashPassword = await bcrypt.hash(password, 5);
 
-      const User = await user.create({ email, role, password: hashPassword });
+      const User = await user.create({ email, password: hashPassword });
 
-      const token = generateJwt(User.id, User.email, User.role);
+      const token = generateJwt(User.email, User.id);
 
       return res.json({ token });
     } catch (e) {
-      console.error(e);
+      res.status(400).send('Registration error');
     }
   }
 
@@ -40,7 +46,7 @@ class authContoller {
         res.status(400).send('Ошибка авторизации');
       }
 
-      const token = generateJwt(User.id, User.email, User.role);
+      const token = generateJwt(User.email, User.id);
 
       return res.json({ token });
     } catch (e) {
@@ -49,12 +55,12 @@ class authContoller {
     }
   }
 
-  async getUsers(req, res) {
+  async check(req, res, next) {
     try {
-      res.send('Hello');
-    } catch (e) {
-      console.error(e);
-    }
+      const token = generateJwt(req.user.id, req.user.email);
+
+      return res.json({ token });
+    } catch (e) {}
   }
 }
 

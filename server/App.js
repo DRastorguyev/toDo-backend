@@ -35,6 +35,6 @@ recursive(`${__dirname}/routes/`).forEach((file) =>
 
 // Auth router
 
-app.use('/auth', authRouter);
+app.use('/user', authRouter);
 
 start();
