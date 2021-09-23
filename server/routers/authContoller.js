@@ -40,7 +40,6 @@ class authContoller {
       if (!User) {
         res.status(400).send('Пользователь не найден');
       }
-      console.log(User);
       let comparePassword = bcrypt.compareSync(password, User.password);
       if (!comparePassword) {
         res.status(400).send('Ошибка авторизации');

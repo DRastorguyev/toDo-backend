@@ -27,8 +27,6 @@ router.get('/todos', authMiddlware, async (req, res) => {
     });
   }
 
-  console.log(req.query);
-
   res.send(todos);
 });
 
