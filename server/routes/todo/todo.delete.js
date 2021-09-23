@@ -10,6 +10,7 @@ router.delete('/todo/:id', authMiddlware, (req, res) => {
   const deletedTodo = todo.destroy({
     where: {
       id,
+      user_id: req.user.id
     },
   });
 

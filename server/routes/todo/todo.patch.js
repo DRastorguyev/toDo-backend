@@ -12,7 +12,7 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
   try {
     const updatedTodo = await todo.update(
       { title, done },
-      { where: { id: id } }
+      { where: { id: id, user_id: req.user.id } }
     );
     res.send(updatedTodo);
   } catch (e) {
