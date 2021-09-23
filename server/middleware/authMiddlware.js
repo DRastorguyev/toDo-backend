@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {
   try {
-
     const token = req.headers.authorization.split(' ')[1]; // Bearer dasdasdasd
     
     if (!token) {
@@ -10,7 +9,7 @@ module.exports = function (req, res, next) {
     }
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
-    req.user = decodedToken;
+    res.locals.user = decodedToken;
 
     next();
   } catch (e) {

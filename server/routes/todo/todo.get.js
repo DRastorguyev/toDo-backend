@@ -9,7 +9,7 @@ router.get('/todos', authMiddlware, async (req, res) => {
   const { filterBy, order } = req.query;
 
   const where = {
-    user_id: req.user.id
+    user_id: res.locals.user.id
   };
 
   if (filterBy) where.done = filterBy === 'done' ? true : false;

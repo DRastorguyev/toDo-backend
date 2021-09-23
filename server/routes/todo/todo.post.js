@@ -10,7 +10,7 @@ router.post('/todo', authMiddlware, async (req, res) => {
 
   const newTodo = await todo.create({
     title,
-    user_id: req.user.id
+    user_id: res.locals.user.id
   });
 
   res.send(newTodo);
