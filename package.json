@@ -1,0 +1,36 @@
+{
+  "name": "toDo-backend-reborn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "make-model": "npx sequelize-cli model:generate --name user --attributes done:boolean",
+    "migrate": "npx sequelize-cli db:migrate",
+    "undo": "npx sequelize-cli db:migrate:undo",
+    "make-seed": "npx sequelize-cli seed:generate --name demo-user",
+    "seed": "npx sequelize-cli db:seed:all",
+    "serve": "nodemon App.js",
+    "start": "node App.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.0",
+    "node-uuid": "^1.4.8",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "recursive-readdir-sync": "^1.0.6",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
