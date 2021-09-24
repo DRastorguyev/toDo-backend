@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/todos', authMiddlware, async (req, res) => {
   const { filterBy, order } = req.query;
-  
+
   try {
     const where = {
       user_id: res.locals.user.id,
