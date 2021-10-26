@@ -14,7 +14,10 @@ router.get('/todos', authMiddlware, async (req, res) => {
 
     if (filterBy) where.done = filterBy === 'done' ? true : false;
 
-    const sortedTodos = [['createdAt', order === 'asc' ? 'DESC' : 'ASC']];
+    const sortedTodos = [
+      ['menu_position', 'ASC'],
+      ['createdAt', order === 'asc' ? 'DESC' : 'ASC'],
+    ];
 
     const todos = await todo.findAll({
       where,

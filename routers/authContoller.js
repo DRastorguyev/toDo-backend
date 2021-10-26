@@ -14,19 +14,24 @@ const registration = async (req, res) => {
 
     const { email, password } = req.body;
 
+    
     const candidate = await user.findOne({ where: { email } });
-
+    
     if (candidate) {
       return res
-        .status(400)
-        .json({ message: 'User with such mail already exists' });
+      .status(400)
+      .json({ message: 'User with such mail already exists' });
     }
-
+    
+    
     const hashPassword = await bcrypt.hash(password, 5);
-
+    
     const User = await user.create({ email, password: hashPassword });
-
+    
+    
     const token = generateJwt(User.email, User.id);
+    
+    console.log('token', token);
 
     return res.json({ token });
     

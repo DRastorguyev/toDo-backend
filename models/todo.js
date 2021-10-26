@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({user}) {
+    static associate({ user }) {
       this.belongsTo(user, {
         as: 'todos',
-        foreignKey: 'user_id'
+        foreignKey: 'user_id',
       });
     }
   }
@@ -21,18 +21,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      title:{
+      title: {
         type: DataTypes.STRING,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       user_id: {
         type: DataTypes.INTEGER,
         validate: {
-          notEmpty: true
-        }
-      }
+          notEmpty: true,
+        },
+      },
+      menu_position: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: true,
+        },
+      },
     },
     {
       sequelize,
