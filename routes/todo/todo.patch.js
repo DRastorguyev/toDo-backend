@@ -11,7 +11,7 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
   const { title, done, selectedTodoId, targetTodoId } = req.body;
 
   try {
-    if (title || done) {
+    if (title || done !== undefined) {
       const updatedTodo = await todo.update(
         { title, done },
         { where: { id: id, user_id } }
