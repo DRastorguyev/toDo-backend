@@ -15,8 +15,39 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
       { title, done },
       { where: { id: id, user_id } }
     );
+    const selectedTodo = await todo.findOne({
+      where: {
+        id: selectedTodoId,
+      },
+    });
+    if (id) {
+      await todo.update(
+        {
+          menu_position: literal(
+            `(SELECT t.menu_position FROM todos AS t WHERE t.id = ${targetTodoId})`
+          ),
+        },
+        {
+          where: {
+            id: selectedTodoId,
+          },
+        }
+      );
 
-    
+      await todo.update(
+        {
+          menu_position: selectedTodo.menu_position,
+        },
+        {
+          where: {
+            id: targetTodoId,
+          },
+        }
+      );
+    } else {
+      res.send(updatedTodo);
+    }
+
     res.send(updatedTodo);
   } catch (e) {
     console.error(e.message);
