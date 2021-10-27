@@ -53,6 +53,8 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
 
       res.send(updatedTodo);
     }
+
+    res.status(400).json({ message: 'Bad Request' });
   } catch (e) {
     console.error(e.message);
   }
