@@ -11,20 +11,22 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
   const { title, done, selectedTodoId, targetTodoId } = req.body;
 
   try {
-    const updatedTodo = await todo.update(
-      { title, done },
-      { where: { id: id, user_id } }
-    );
+    if (title || done) {
+      const updatedTodo = await todo.update(
+        { title, done },
+        { where: { id: id, user_id } }
+      );
 
-    const selectedTodo = await todo.findOne({
-      where: {
-        id: selectedTodoId,
-      },
-    });
-
-    if (selectedTodoId === undefined) {
       res.send(updatedTodo);
-    } else {
+    }
+
+    if (selectedTodoId || targetTodoId) {
+      const selectedTodo = await todo.findOne({
+        where: {
+          id: selectedTodoId,
+        },
+      });
+
       await todo.update(
         {
           menu_position: literal(
@@ -48,9 +50,9 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
           },
         }
       );
-    }
 
-    res.send(updatedTodo);
+      res.send(updatedTodo);
+    }
   } catch (e) {
     console.error(e.message);
   }
