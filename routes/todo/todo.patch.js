@@ -20,7 +20,8 @@ router.patch('/todos/:id', authMiddlware, async (req, res) => {
         id: selectedTodoId,
       },
     });
-    if (id) {
+
+    if ((title, done)) {
       await todo.update(
         {
           menu_position: literal(
